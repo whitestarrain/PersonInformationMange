@@ -7,7 +7,7 @@ public class Student {
     private String id;
     private String name;
     private String deptName;
-    private String totCred;
+    private int totCred;
 
     @Override
     public String toString() {
@@ -43,11 +43,12 @@ public class Student {
         this.deptName = deptName;
     }
 
-    public String getTotCred() {
+    public int getTotCred() {
         return totCred;
     }
 
-    public void setTotCred(String totCred) {
+    public void setTotCred(int totCred) {
         this.totCred = totCred;
     }
+
 }

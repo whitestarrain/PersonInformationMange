@@ -23,22 +23,22 @@
 <body>
 <div class="container" style="width: 500px">
     <h2 style="text-align: center">添加学生</h2>
-    <form>
+    <form action="${pageContext.request.contextPath}/addServlet" method="post">
         <div class="form-group">
             <label for="exampleInputEmail1">id</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="id">
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="id" name="id">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword3">姓名</label>
-            <input type="password" class="form-control" id="exampleInputPassword3" placeholder="name">
+            <input type="text" class="form-control" id="exampleInputPassword3" placeholder="name" name="name">
         </div>
         <div class="form-group">
             <label for="exampleInputPasswor1">专业名称</label>
-            <input type="password" class="form-control" id="exampleInputPasswor1" placeholder="profession">
+            <input type="text" class="form-control" id="exampleInputPasswor1" placeholder="profession" name="deptName" >
         </div>
         <div class="form-group">
-            <label for="exampleInputPasswrd1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPasswrd1" placeholder="Password">
+            <label for="exampleInputPasswrd1">学分</label>
+            <input type="text" class="form-control" id="exampleInputPasswrd1" placeholder="学分" name="totCred">
         </div>
         <div style="text-align: center">
             <button type="submit" class="btn btn-primary">提交</button>

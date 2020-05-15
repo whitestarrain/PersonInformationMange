@@ -12,7 +12,13 @@ public interface StudentDao {
     /**
      * 查询数据库获得学生信息
      * @param i 教员信息
-     * @return
+     * @return 返回查询到的所有学生的信息，用List存储
      */
     public List<Student> getStudent(Instructor i);
+
+    /**
+     * 往数据库中添加学生
+     * @param s 学生对象
+     */
+    public void addStudent(Student s);
 }

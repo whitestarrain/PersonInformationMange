@@ -14,6 +14,13 @@ import java.util.List;
  */
 public class StudentDaoImpl implements StudentDao {
     @Override
+    public void addStudent(Student s) {
+        JdbcTemplate jdbcTemplate=new JdbcTemplate(JdbcUtils.getDataSourse());
+        String sql="insert into student values(?,?,?,?)";
+        jdbcTemplate.update(sql,s.getId(),s.getName(),s.getDeptName(),s.getTotCred());
+    }
+
+    @Override
     public List<Student> getStudent(Instructor i) {
         JdbcTemplate jdbcTemplate=new JdbcTemplate(JdbcUtils.getDataSourse());
         String sql="select * from student";

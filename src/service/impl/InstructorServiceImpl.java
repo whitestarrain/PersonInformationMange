@@ -1,5 +1,6 @@
 package service.impl;
 
+import dao.InstructorDao;
 import dao.impl.InstructorDaoImpl;
 import domain.Instructor;
 import service.InstructorService;
@@ -7,10 +8,11 @@ import service.InstructorService;
 /**
  * @author liyu
  */
-public class InstructerServiceImpl implements InstructorService {
+public class InstructorServiceImpl implements InstructorService {
+    private InstructorDao dao = new InstructorDaoImpl();
+
     @Override
     public Instructor login(Instructor i) {
-        InstructorDaoImpl instructorDao = new InstructorDaoImpl();
-        return instructorDao.login(i);
+       return dao.login(i);
     }
 }

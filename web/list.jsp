@@ -1,4 +1,4 @@
-<%--
+<%@ page import="domain.Instructor" %><%--
   Created by IntelliJ IDEA.
   User: 稀落的星
   Date: 2020/5/13
@@ -7,6 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    Instructor loginInstructor = (Instructor)request.getSession().getAttribute("loginInstructor");
+    if(loginInstructor==null||"".equals(loginInstructor.getName())){
+        response.sendRedirect(request.getContextPath()+"/login.jsp");
+    }
+%>
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -70,7 +76,7 @@
 
     <tr>
         <td align="center" colspan="6">
-            <button class="btn btn-primary" style="text-align: center">添加联系人</button>
+            <a class="btn btn-primary" style="text-align: center" href="${pageContext.request.contextPath}/add.jsp" >添加联系人</a>
         </td>
     </tr>
     </tbody>

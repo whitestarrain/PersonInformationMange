@@ -3,7 +3,7 @@ package web.servlet;
 import domain.Instructor;
 import org.apache.commons.beanutils.BeanUtils;
 import service.InstructorService;
-import service.impl.InstructerServiceImpl;
+import service.impl.InstructorServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,11 +34,10 @@ public class LoginServlet extends HttpServlet {
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
-            InstructorService service = new InstructerServiceImpl();
+            InstructorService service = new InstructorServiceImpl();
             Instructor loginInsturctor = service.login(instructor);
             if (loginInsturctor == null) {
-                request.setAttribute("loginInfo", "用户名或密码错误");
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                request.setAttribute("loginInfo", "用户名或密码错误");request.getRequestDispatcher("/login.jsp").forward(request, response);
             } else {
                 //将登录的人的信息保存在Sessiong中
                 //TODO Cookie保证Session持久化功能带完善
