@@ -15,6 +15,17 @@ public class StudentServiceImpl implements StudentService {
     StudentDao dao=new StudentDaoImpl();
 
     @Override
+    public void updateStudent(Student s) {
+        dao.updateStudent(s);
+    }
+
+    @Override
+    public Student findStudent(String id) {
+        Student student = dao.findStudent(id);
+        return student;
+    }
+
+    @Override
     public void addStudent(Student s) {
         dao.addStudent(s);
     }

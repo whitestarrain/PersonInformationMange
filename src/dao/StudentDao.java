@@ -21,4 +21,18 @@ public interface StudentDao {
      * @param s 学生对象
      */
     public void addStudent(Student s);
+
+    /**
+     * 根据学生id返回学生对象
+     * @param id 学生id
+     * @return 学生对象
+     */
+    public Student findStudent(String id);
+
+    /**
+     * 更新学生信息
+     * @param s 新的学生信息
+     */
+    public void updateStudent(Student s);
 }
+

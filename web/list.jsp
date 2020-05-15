@@ -37,7 +37,7 @@
     <h1>Hello,${sessionScope.loginInstructor.name} </h1>
 </div>
 <h2 style="text-align: center">学生列表</h2>
-<table class="table table-hover table-bordered">
+<table class="table table-hover table-bordered" id="table">
     <thead style="background-color: antiquewhite">
     <tr>
         <th><input type="checkbox" id="firstCb"></th>
@@ -67,8 +67,8 @@
                     ${studnet.totCred}
             </td>
             <td>
-                <button class="btn btn-default">修改</button>
-                <button class="btn btn-default">删除</button>
+                <a class="btn btn-default" href="${pageContext.request.contextPath}/FindStudentServlet?id=${studnet.id}">修改</a>
+                <a class="btn btn-default">删除</a>
             </td>
         </tr>
 

@@ -22,4 +22,17 @@ public interface StudentService {
      * @param s 学生对象
      */
     public void addStudent(Student s);
+
+    /**
+     * 根据学生id返回学生对象
+     * @param id 学生id
+     * @return 学生对象
+     */
+    public Student findStudent(String id);
+
+    /**
+     * 更新学生数据
+     * @param s 新的学生数据保存对象
+     */
+    public void updateStudent(Student s);
 }
