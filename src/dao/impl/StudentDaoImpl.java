@@ -16,15 +16,21 @@ public class StudentDaoImpl implements StudentDao {
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(JdbcUtils.getDataSourse());
 
     @Override
+    public void deleteStudent(String id) {
+        String sql = "delete from student where id=?";
+        jdbcTemplate.update(sql, id);
+    }
+
+    @Override
     public Student findStudent(String id) {
-        String sql="select * from student where id=?";
+        String sql = "select * from student where id=?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Student>(Student.class), id);
     }
 
     @Override
     public void updateStudent(Student s) {
-        String sql="update student set name=?,deptName=?,totCred=? where id=?";
-        jdbcTemplate.update(sql,s.getName(),s.getDeptName(),s.getTotCred(),s.getId());
+        String sql = "update student set name=?,deptName=?,totCred=? where id=?";
+        jdbcTemplate.update(sql, s.getName(), s.getDeptName(), s.getTotCred(), s.getId());
     }
 
     @Override

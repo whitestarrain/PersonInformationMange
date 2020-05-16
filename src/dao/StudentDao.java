@@ -34,5 +34,11 @@ public interface StudentDao {
      * @param s 新的学生信息
      */
     public void updateStudent(Student s);
+
+    /**
+     * 删除指定id的学生
+      * @param id 学生id
+     */
+    public void deleteStudent(String id);
 }
 

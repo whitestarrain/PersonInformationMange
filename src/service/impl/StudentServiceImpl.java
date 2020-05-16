@@ -26,6 +26,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public void deleteStudent(String id) {
+        dao.deleteStudent(id);
+    }
+
+    @Override
     public void addStudent(Student s) {
         dao.addStudent(s);
     }

@@ -35,4 +35,10 @@ public interface StudentService {
      * @param s 新的学生数据保存对象
      */
     public void updateStudent(Student s);
+
+    /**
+     * 根据指定id删除学生
+     * @param id 学生id
+     */
+    public void deleteStudent(String id);
 }

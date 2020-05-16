@@ -31,6 +31,13 @@
             text-align: center;
         }
     </style>
+    <script>
+        function deleteStudent(id) {
+            if(confirm("确定要删除吗")){
+                location.href="${pageContext.request.contextPath}/DeleteServlet?id="+id
+            }
+        }
+    </script>
 </head>
 <body class="container">
 <div class="jumbotron">
@@ -68,7 +75,7 @@
             </td>
             <td>
                 <a class="btn btn-default" href="${pageContext.request.contextPath}/FindStudentServlet?id=${studnet.id}">修改</a>
-                <a class="btn btn-default">删除</a>
+                <a class="btn btn-default" href="javascript:deleteStudent(${studnet.id})">删除</a>
             </td>
         </tr>
 
