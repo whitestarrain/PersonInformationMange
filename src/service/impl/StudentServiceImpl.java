@@ -26,6 +26,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public void deleteSelectedStudent(String[] sids) {
+        if (sids!=null&&sids.length>0){
+            for(String s:sids){
+                deleteStudent(s);
+            }
+        }
+    }
+
+    @Override
     public void deleteStudent(String id) {
         dao.deleteStudent(id);
     }

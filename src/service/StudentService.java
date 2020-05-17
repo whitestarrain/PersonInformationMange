@@ -41,4 +41,10 @@ public interface StudentService {
      * @param id 学生id
      */
     public void deleteStudent(String id);
+
+    /**
+     * 删除所选学生
+     * @param sids 学生id列表
+     */
+    void deleteSelectedStudent(String[] sids);
 }
