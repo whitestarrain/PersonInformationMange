@@ -1,6 +1,7 @@
 package dao;
 
 import domain.Instructor;
+import domain.PageBean;
 import domain.Student;
 
 import java.util.List;
@@ -40,5 +41,19 @@ public interface StudentDao {
       * @param id 学生id
      */
     public void deleteStudent(String id);
+
+    /**
+     * 根据页数获取部分学生
+     * @param row 每页多少行
+     * @param currentPage 要获取的当前页数
+     * @return 查到的学生集合
+     */
+    List<Student> getStudentByPage(int row, int currentPage);
+
+    /**
+     * 获取学生的人数
+     * @return 学生人数
+     */
+    int getAllCount();
 }
 

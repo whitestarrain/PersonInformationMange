@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
                 //将登录的人的信息保存在Sessiong中
                 //TODO Cookie保证Session持久化功能带完善
                 request.getSession().setAttribute("loginInstructor", loginInsturctor);
-                request.getRequestDispatcher("/ListServlet").forward(request, response);
+                request.getRequestDispatcher("/PageListServlet").forward(request, response);
             }
         } else {
             request.setAttribute("checkcodeInfo", "验证码错误");

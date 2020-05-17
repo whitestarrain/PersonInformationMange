@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.StudentDao;
 import domain.Instructor;
+import domain.PageBean;
 import domain.Student;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,6 +15,27 @@ import java.util.List;
  */
 public class StudentDaoImpl implements StudentDao {
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(JdbcUtils.getDataSourse());
+
+    @Override
+    public int getAllCount() {
+        String sql="select count(id) from student";
+        Integer integer = jdbcTemplate.queryForObject(sql, Integer.class);
+        return integer;
+    }
+
+    @Override
+    public List<Student> getStudentByPage(int row, int currentPage) {
+        int allCount=this.getAllCount();
+        int c=currentPage;
+        int allpage = (allCount % row == 0) ? allCount / row : allCount / row + 1;
+        if(currentPage> (allpage)){
+            c= allpage;
+        }
+        int start=(c-1)*row;
+        String sql="select * from student limit ?,?";
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Student>(Student.class), start, row);
+    }
 
     @Override
     public void deleteStudent(String id) {

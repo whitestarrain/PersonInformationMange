@@ -3,6 +3,7 @@ package service.impl;
 import dao.StudentDao;
 import dao.impl.StudentDaoImpl;
 import domain.Instructor;
+import domain.PageBean;
 import domain.Student;
 import service.StudentService;
 
@@ -26,6 +27,18 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public PageBean<Student> getStudentByPage(int row, int currentPage) {
+        PageBean<Student> studentPageBean = new PageBean<>();
+        studentPageBean.setCurrentPage(currentPage);
+        studentPageBean.setList(dao.getStudentByPage(row,currentPage));
+        int totalCount=dao.getAllCount();
+        studentPageBean.setTotalCount(totalCount);
+        studentPageBean.setTotalPage((totalCount%row==0)?totalCount/row:totalCount/row+1);
+
+        return studentPageBean;
+    }
+
+    @Override
     public void deleteSelectedStudent(String[] sids) {
         if (sids!=null&&sids.length>0){
             for(String s:sids){
@@ -46,7 +59,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> getStudent(Instructor i) {
-        StudentDaoImpl studentDao = new StudentDaoImpl();
-        return studentDao.getStudent(i);
+        return dao.getStudent(i);
     }
 }

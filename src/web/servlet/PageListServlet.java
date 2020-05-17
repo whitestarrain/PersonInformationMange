@@ -1,6 +1,7 @@
 package web.servlet;
 
-import domain.Instructor;
+import domain.PageBean;
+import domain.Student;
 import service.StudentService;
 import service.impl.StudentServiceImpl;
 
@@ -15,16 +16,27 @@ import java.io.IOException;
 /**
  * @author liyu
  */
-@WebServlet("/ListServlet")
-public class ListServlet extends HttpServlet {
+@WebServlet("/PageListServlet")
+public class PageListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        String currentPage = request.getParameter("currentPage");
+        String row=request.getParameter("row");
+        if(currentPage==null){
+            currentPage="1";
+        }else if(Integer.parseInt(currentPage)<=0){
+            currentPage="1";
+        }
+
+        if(row==null){
+            row="5";
+        }
+
         StudentService ss = new StudentServiceImpl();
-        //查询数据库本来会和用户相关，这里只是一个小案例，直接展现数据库所有数据了。即使这里传了参其实也没使用
-        Instructor loginInstructor = (Instructor) session.getAttribute("loginInstructor");
-        session.setAttribute("studentList", ss.getStudent(loginInstructor));
-        response.sendRedirect(request.getContextPath() + "/list.jsp");
+        PageBean<Student> pb = ss.getStudentByPage(Integer.parseInt(row), Integer.parseInt(currentPage));
+        HttpSession session = request.getSession();
+        session.setAttribute("pageBean",pb);
+        response.sendRedirect(request.getContextPath()+"/listByPage.jsp");
     }
 
     @Override

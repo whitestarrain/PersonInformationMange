@@ -1,6 +1,7 @@
 package service;
 
 import domain.Instructor;
+import domain.PageBean;
 import domain.Student;
 
 import java.util.List;
@@ -47,4 +48,12 @@ public interface StudentService {
      * @param sids 学生id列表
      */
     void deleteSelectedStudent(String[] sids);
+
+    /**
+     * 根据页数获取部分学生
+     * @param row 每页多少行
+     * @param currentPage 要获取的当前页数
+     * @return 查到的学生集合
+     */
+    PageBean<Student> getStudentByPage(int row, int currentPage);
 }
