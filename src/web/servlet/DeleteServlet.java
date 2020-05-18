@@ -19,7 +19,7 @@ public class DeleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         StudentDao dao=new StudentDaoImpl();
         dao.deleteStudent(request.getParameter("id"));
-        response.sendRedirect(request.getContextPath()+"/ListServlet");
+        response.sendRedirect(request.getContextPath()+"/PageListServlet");
     }
 
     @Override

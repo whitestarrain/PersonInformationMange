@@ -31,7 +31,7 @@ public class addServlet extends HttpServlet {
         }
         StudentService ss=new StudentServiceImpl();
         ss.addStudent(s);
-        response.sendRedirect(request.getContextPath()+"/ListServlet");
+        response.sendRedirect(request.getContextPath()+"/PageListServlet");
     }
 
     @Override

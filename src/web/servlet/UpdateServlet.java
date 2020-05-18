@@ -30,7 +30,7 @@ public class UpdateServlet extends HttpServlet {
         }
         StudentDao dao=new StudentDaoImpl();
         dao.updateStudent(s);
-        response.sendRedirect(request.getContextPath()+"/ListServlet");
+        response.sendRedirect(request.getContextPath()+"/PageListServlet");
     }
 
 

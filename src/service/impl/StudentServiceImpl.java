@@ -29,11 +29,12 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public PageBean<Student> getStudentByPage(int row, int currentPage) {
         PageBean<Student> studentPageBean = new PageBean<>();
-        studentPageBean.setCurrentPage(currentPage);
         studentPageBean.setList(dao.getStudentByPage(row,currentPage));
         int totalCount=dao.getAllCount();
         studentPageBean.setTotalCount(totalCount);
-        studentPageBean.setTotalPage((totalCount%row==0)?totalCount/row:totalCount/row+1);
+        int totalPage=(totalCount%row==0)?totalCount/row:totalCount/row+1;
+        studentPageBean.setTotalPage(totalPage);
+        studentPageBean.setCurrentPage(Math.min(currentPage, totalPage));
 
         return studentPageBean;
     }

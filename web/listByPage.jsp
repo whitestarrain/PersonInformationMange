@@ -66,6 +66,15 @@
                 }
 
             }
+            var currentPage =${sessionScope.pageBean.currentPage};
+            var aheadli = document.getElementById("aheadli");
+            var afterli = document.getElementById("afterli");
+            if (currentPage == 1) {
+                aheadli.className = "disabled"
+            }
+            if (currentPage ==${sessionScope.pageBean.totalPage}) {
+                afterli.className = "disabled"
+            }
         }
     </script>
 </head>
@@ -140,18 +149,31 @@
 </form>
 <nav aria-label="Page navigation">
     <ul class="pagination">
-        <li>
-            <a href="${pageContext.request.contextPath}/PageListServlet?currentPage=${sessionScope.pageBean.currentPage-1}&row=5" aria-label="Previous">
+        <li id="aheadli">
+            <a
+               href="${pageContext.request.contextPath}/PageListServlet?currentPage=${sessionScope.pageBean.currentPage-1}&row=5"
+               aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-        <c:forEach begin="1" end="${sessionScope.pageBean.totalPage}" var="i">
+        <c:forEach begin="1" end="${sessionScope.pageBean.currentPage-1}" var="i">
             <li>
                 <a href="${pageContext.request.contextPath}/PageListServlet?currentPage=${i}&row=5">${i}</a>
             </li>
         </c:forEach>
-        <li>
-            <a href="${pageContext.request.contextPath}/PageListServlet?currentPage=${sessionScope.pageBean.currentPage+1}&row=5" aria-label="Next">
+        <li class="active">
+            <a href="${pageContext.request.contextPath}/PageListServlet?currentPage=${sessionScope.pageBean.currentPage}&row=5"
+               >${sessionScope.pageBean.currentPage}</a>
+        </li>
+        <c:forEach begin="${sessionScope.pageBean.currentPage+1}" end="${sessionScope.pageBean.totalPage}" var="i">
+            <li>
+                <a href="${pageContext.request.contextPath}/PageListServlet?currentPage=${i}&row=5">${i}</a>
+            </li>
+        </c:forEach>
+        <li id="afterli">
+            <a
+               href="${pageContext.request.contextPath}/PageListServlet?currentPage=${sessionScope.pageBean.currentPage+1}&row=5"
+               aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

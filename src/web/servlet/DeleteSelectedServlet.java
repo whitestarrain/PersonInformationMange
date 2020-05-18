@@ -20,7 +20,7 @@ public class DeleteSelectedServlet extends HttpServlet {
         String[] sids = request.getParameterValues("sid");
         StudentService studentService=new StudentServiceImpl();
         studentService.deleteSelectedStudent(sids);
-        response.sendRedirect(request.getContextPath()+"/ListServlet");
+        response.sendRedirect(request.getContextPath()+"/PageListServlet");
     }
 
     @Override
