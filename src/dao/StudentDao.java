@@ -5,6 +5,7 @@ import domain.PageBean;
 import domain.Student;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author liyu
@@ -48,12 +49,12 @@ public interface StudentDao {
      * @param currentPage 要获取的当前页数
      * @return 查到的学生集合
      */
-    List<Student> getStudentByPage(int row, int currentPage);
+    List<Student> getStudentByPage(Map<String,String> condition, int row, int currentPage);
 
     /**
      * 获取学生的人数
      * @return 学生人数
      */
-    int getAllCount();
+    int getAllCount(Map<String,String> condition);
 }
 

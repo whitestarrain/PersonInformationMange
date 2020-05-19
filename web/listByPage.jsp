@@ -75,6 +75,12 @@
             if (currentPage ==${sessionScope.pageBean.totalPage}) {
                 afterli.className = "disabled"
             }
+
+            var searchFrom=document.getElementById("searchForm");
+            var searchButton=document.getElementById("searchButton");
+            searchButton.onclick=function(){
+                searchFrom.submit();
+            }
         }
     </script>
 </head>
@@ -83,21 +89,22 @@
     <h1>Hello,${sessionScope.loginInstructor.name} </h1>
 </div>
 <h2 style="text-align: center">学生列表</h2>
-<form class="form-inline">
+<form class="form-inline" id="searchForm" action="${pageContext.request.contextPath}/SeachServlet" method="post">
     <div class="form-group">
         <label for="exampleInputName2">姓名</label>
-        <input type="text" class="form-control" id="exampleInputName2" placeholder="姓名" name="name">
+        <input type="text" class="form-control" id="exampleInputName2" placeholder="姓名" name="name" value="${sessionScope.condition.name}">
     </div>
     <div class="form-group">
         <label for="exampleInputEmail2">专业</label>
-        <input type="text" class="form-control" id="exampleInputEmail2" placeholder="deptName">
+        <input type="text" class="form-control" id="exampleInputEmail2" placeholder="deptName" value="${sessionScope.condition.deptName}">
     </div>
     <div class="form-group">
         <label for="exampleInputName3">学分</label>
-        <input type="text" class="form-control" id="exampleInputName3" placeholder="学分" name="totCred">
+        <input type="text" class="form-control" id="exampleInputName3" placeholder="学分" name="totCred" value="${sessionScope.condition.totCred}">
     </div>
-    <button type="submit" class="btn btn-default">查询</button>
+    <button type="submit" class="btn btn-default" id="searchButton">查询</button>
     <div class="form-group" style="float: right;margin-right: 5px;">
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}/PageListServlet?all=1">全部学生</a>
         <a class="btn btn-primary" style="text-align: center"
            href="${pageContext.request.contextPath}/add.jsp">添加学生</a>
         <%--        复习：禁止标签默认行为--%>

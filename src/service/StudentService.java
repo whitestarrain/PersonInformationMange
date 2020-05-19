@@ -5,6 +5,7 @@ import domain.PageBean;
 import domain.Student;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author liyu
@@ -56,4 +57,11 @@ public interface StudentService {
      * @return 查到的学生集合
      */
     PageBean<Student> getStudentByPage(int row, int currentPage);
+
+    /**
+     * 通过搜索条件返回最终结果
+     * @param map 查询条件
+     * @return 分页list信息
+     */
+    PageBean<Student> searchStudent(Map<String,String> map,int row,int currentPage);
 }

@@ -25,6 +25,8 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding(String.valueOf(StandardCharsets.UTF_8));
         String checkcode = (String) request.getSession().getAttribute("checkcode");
         if (checkcode != null && checkcode.equalsIgnoreCase(request.getParameter("checkcode"))) {
+            // 验证码用了一次后就删除
+            request.getSession().removeAttribute("checkcode");
             Map<String, String[]> map = request.getParameterMap();
             Instructor instructor = new Instructor();
             try {
@@ -37,7 +39,8 @@ public class LoginServlet extends HttpServlet {
             InstructorService service = new InstructorServiceImpl();
             Instructor loginInsturctor = service.login(instructor);
             if (loginInsturctor == null) {
-                request.setAttribute("loginInfo", "用户名或密码错误");request.getRequestDispatcher("/login.jsp").forward(request, response);
+                request.setAttribute("loginInfo", "用户名或密码错误");
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
             } else {
                 //将登录的人的信息保存在Sessiong中
                 //TODO Cookie保证Session持久化功能带完善
@@ -49,7 +52,7 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
         //登录验证完成后删除checkcode
-        request.getSession().removeAttribute("checkcode");
+
 
     }
 

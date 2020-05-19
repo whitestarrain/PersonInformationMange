@@ -2,13 +2,15 @@ package dao.impl;
 
 import dao.StudentDao;
 import domain.Instructor;
-import domain.PageBean;
 import domain.Student;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import utils.JdbcUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author liyu
@@ -17,24 +19,49 @@ public class StudentDaoImpl implements StudentDao {
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(JdbcUtils.getDataSourse());
 
     @Override
-    public int getAllCount() {
-        String sql="select count(id) from student";
-        Integer integer = jdbcTemplate.queryForObject(sql, Integer.class);
+    public int getAllCount(Map<String, String> condition) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("select count(id) from student where 1=1 ");
+        List<Object> param=new ArrayList<>();
+        if(condition!=null){
+            Set<String> keySet = condition.keySet();
+            for (String s : keySet) {
+                if (condition.get(s) != null) {
+                    sb.append(" and ").append(s).append(" like ").append(" ? ");
+                    param.add("%" + condition.get(s) + "%");
+                }
+            }
+        }
+        Integer integer = jdbcTemplate.queryForObject(sb.toString(), Integer.class,param.toArray());
         return integer;
     }
 
     @Override
-    public List<Student> getStudentByPage(int row, int currentPage) {
-        int allCount=this.getAllCount();
-        int c=currentPage;
+    public List<Student> getStudentByPage(Map<String, String> condition, int row, int currentPage) {
+        int allCount = this.getAllCount(condition);
+        int c = currentPage;
         int allpage = (allCount % row == 0) ? allCount / row : allCount / row + 1;
-        if(currentPage> (allpage)){
-            c= allpage;
+        if (currentPage > (allpage)) {
+            c = allpage;
         }
-        int start=(c-1)*row;
-        String sql="select * from student limit ?,?";
+        int start = (c - 1) * row;
 
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Student>(Student.class), start, row);
+        StringBuilder sb = new StringBuilder();
+        sb.append("select * from student where 1=1 ");
+        List<Object> param=new ArrayList<>();
+        if(condition!=null){
+            Set<String> keySet = condition.keySet();
+            for (String s : keySet) {
+                if (condition.get(s) != null) {
+                    sb.append(" and ").append(s).append(" like ").append(" ? ");
+                    param.add("%" + condition.get(s) + "%");
+                }
+            }
+        }
+        sb.append(" limit ?,? ");
+        param.add(start);
+        param.add(row);
+        return jdbcTemplate.query(sb.toString(), new BeanPropertyRowMapper<Student>(Student.class), param.toArray());
     }
 
     @Override

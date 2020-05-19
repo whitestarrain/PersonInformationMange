@@ -8,6 +8,7 @@ import domain.Student;
 import service.StudentService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author liyu
@@ -27,16 +28,24 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public PageBean<Student> getStudentByPage(int row, int currentPage) {
+    public PageBean<Student> searchStudent(Map<String, String> map,int row ,int currentPage) {
+        return getStudentByPageCondition(map,row,currentPage);
+    }
+    private PageBean<Student> getStudentByPageCondition(Map<String,String> condition, int row, int currentPage){
         PageBean<Student> studentPageBean = new PageBean<>();
-        studentPageBean.setList(dao.getStudentByPage(row,currentPage));
-        int totalCount=dao.getAllCount();
+        studentPageBean.setList(dao.getStudentByPage(condition,row,currentPage));
+        int totalCount=dao.getAllCount(condition);
         studentPageBean.setTotalCount(totalCount);
         int totalPage=(totalCount%row==0)?totalCount/row:totalCount/row+1;
         studentPageBean.setTotalPage(totalPage);
         studentPageBean.setCurrentPage(Math.min(currentPage, totalPage));
 
         return studentPageBean;
+    }
+    @Override
+    public PageBean<Student> getStudentByPage(int row, int currentPage) {
+
+        return getStudentByPageCondition(null,row,currentPage);
     }
 
     @Override
