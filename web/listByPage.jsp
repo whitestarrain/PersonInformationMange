@@ -7,12 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    Instructor loginInstructor = (Instructor) request.getSession().getAttribute("loginInstructor");
-    if (loginInstructor == null || "".equals(loginInstructor.getName())) {
-        response.sendRedirect(request.getContextPath() + "/login.jsp");
-    }
-%>
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -58,14 +52,9 @@
                 }
             }
 
-            var firstCb = document.getElementById("firstCb");
-            firstCb.onclick = function () {
-                var sids = document.getElementsByName("sid");
-                for (var i = 0; i < sids.length; i++) {
-                    sids[i].checked = firstCb.checked;
-                }
-
-            }
+            $("#firstCb").click(function () {
+                $("[name=sid]").prop("checked",$(this).prop("checked"))
+            });
             var currentPage =${sessionScope.pageBean.currentPage};
             var aheadli = document.getElementById("aheadli");
             var afterli = document.getElementById("afterli");
@@ -103,6 +92,7 @@
         <input type="text" class="form-control" id="exampleInputName3" placeholder="学分" name="totCred" value="${sessionScope.condition.totCred}">
     </div>
     <button type="submit" class="btn btn-default" id="searchButton">查询</button>
+
     <div class="form-group" style="float: right;margin-right: 5px;">
         <a class="btn btn-primary" href="${pageContext.request.contextPath}/PageListServlet?all=1">全部学生</a>
         <a class="btn btn-primary" style="text-align: center"

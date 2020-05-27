@@ -23,15 +23,6 @@ public class PageListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String currentPage = request.getParameter("currentPage");
         String row=request.getParameter("row");
-        if(currentPage==null){
-            currentPage="1";
-        }else if(Integer.parseInt(currentPage)<=0){
-            currentPage="1";
-        }
-
-        if(row==null){
-            row="5";
-        }
 
         HttpSession session = request.getSession();
         if(null != request.getParameter("all")){
