@@ -61,7 +61,16 @@ public interface StudentService {
     /**
      * 通过搜索条件返回最终结果
      * @param map 查询条件
+     * @param row 每页列数
+     * @param currentPage 当前页
      * @return 分页list信息
      */
     PageBean<Student> searchStudent(Map<String,String> map,int row,int currentPage);
+
+    /**
+     * 检查学生id是否在数据库中存在,存在为true
+     * @param id 学生id
+     * @return json字符串
+     */
+    String checkId(String id);
 }

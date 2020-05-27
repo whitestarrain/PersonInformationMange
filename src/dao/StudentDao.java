@@ -56,5 +56,12 @@ public interface StudentDao {
      * @return 学生人数
      */
     int getAllCount(Map<String,String> condition);
+
+    /**
+     * 查询是否存在id,存在为true
+     * @param id 学生id
+     * @return boolean值
+     */
+    Boolean checkId(String id);
 }
 

@@ -1,5 +1,7 @@
 package service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.StudentDao;
 import dao.impl.StudentDaoImpl;
 import domain.Instructor;
@@ -7,6 +9,7 @@ import domain.PageBean;
 import domain.Student;
 import service.StudentService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +28,29 @@ public class StudentServiceImpl implements StudentService {
     public Student findStudent(String id) {
         Student student = dao.findStudent(id);
         return student;
+    }
+
+    @Override
+    public String checkId(String id) {
+       Boolean isExsit = dao.checkId(id);
+        //左String右Object
+        Map<String,Object> map=new HashMap<String,Object>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        map.put("isExsit",isExsit);
+        String info=null;
+        if((Boolean) isExsit){
+            info="此id已被使用";
+        }else{
+            info="";
+        }
+        map.put("info",info);
+        String s=null;
+        try {
+           s=objectMapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return  s;
     }
 
     @Override

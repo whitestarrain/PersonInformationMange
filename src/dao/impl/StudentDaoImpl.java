@@ -3,6 +3,7 @@ package dao.impl;
 import dao.StudentDao;
 import domain.Instructor;
 import domain.Student;
+import jdk.jfr.StackTrace;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import utils.JdbcUtils;
@@ -17,6 +18,16 @@ import java.util.Set;
  */
 public class StudentDaoImpl implements StudentDao {
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(JdbcUtils.getDataSourse());
+
+    @Override
+    public Boolean checkId(String id) {
+        if(id==null||id==""){
+            return false;
+        }
+        String sql="select count(id) from student where id = ?";
+        Integer integer = jdbcTemplate.queryForObject(sql, Integer.class, id);
+        return integer>0;
+    }
 
     @Override
     public int getAllCount(Map<String, String> condition) {

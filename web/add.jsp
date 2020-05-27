@@ -19,6 +19,21 @@
     <script src="./js/jquery-2.1.0.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="./js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $("#exampleInputEmail1").blur(function () {
+                var val=$(this).val();
+                $.get("CheckIdServlet",{"id":val},function (data) {
+                    $("#info").text(data.info);
+                    if(data.isExsit){
+                        $("#submitbut").attr("disabled",true);
+                    }else{
+                        $("#submitbut").attr("disabled",false);
+                    }
+                },"json");
+            })
+        })
+    </script>
 </head>
 <body>
 <div class="container" style="width: 500px">
@@ -27,6 +42,7 @@
         <div class="form-group">
             <label for="exampleInputEmail1">id</label>
             <input type="text" class="form-control" id="exampleInputEmail1" placeholder="id" name="id">
+            <label id="info" class="label-warning"></label>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword3">姓名</label>
@@ -41,7 +57,7 @@
             <input type="text" class="form-control" id="exampleInputPasswrd1" placeholder="学分" name="totCred">
         </div>
         <div style="text-align: center">
-            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="submit" class="btn btn-primary" id="submitbut">提交</button>
             <button type="reset" class="btn btn-default">重置</button>
             <button type="button" id="back" class="btn btn-default">返回</button>
         </div>

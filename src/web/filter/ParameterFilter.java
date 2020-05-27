@@ -26,7 +26,6 @@ public class ParameterFilter implements Filter {
                         // 因为是小项目就没有把这些数值存入文件，为了可扩展性最好把信息存入配置文件
                         Object result = method.invoke(req, objects);
                         if ("getParameter".equals(method.getName())) {
-                            System.out.println(objects[0]);
                             if ("row".equals(objects[0].toString())) {
                                 return result != null ? result : "5";
                             }
